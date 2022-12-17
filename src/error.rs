@@ -64,7 +64,7 @@ pub enum ErrorCode {
     #[strum(serialize = "other")]
     Other = u64::MAX - 1,
     #[strum(serialize = "unknown")]
-    Unknown = u64::MAX
+    Unknown = u64::MAX,
 }
 
 impl From<u64> for ErrorCode {
@@ -92,8 +92,8 @@ trait RuntimeError: Error {
     fn code(&self) -> ErrorCode;
 }
 
-trait ExLogicError<T: Sized> : LogicError + ExError<T> {}
-trait ExRuntimeError<T: Sized> : RuntimeError + ExError<T> {}
+trait ExLogicError<T: Sized>: LogicError + ExError<T> {}
+trait ExRuntimeError<T: Sized>: RuntimeError + ExError<T> {}
 
 macro_rules! logic_error_template {
     ($($type:ident)*) => ($(
